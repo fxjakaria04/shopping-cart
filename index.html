@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart | javaScript Practice</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="hero-section">
+        <div class="container">
+            <div class="section1 sections">
+                <div class="under-section1">
+                    <img src="images/15.png" class="cart-image" alt="">
+                </div>
+                <div class="under-section2">
+                    <h3 class="productname">I phone 15 pro max</h3>
+                </div>
+                <div class="under-section4">
+                    <button id="phone-minus">-</button>
+                    <input type="number" name="" id="phone-count" value="1">
+                    <button id="phone-plus">+</button>
+                </div>
+                <div class="under-section3">
+                    <h2 class="price">$
+                        <spam id="phone-price">1199</spam>
+                    </h2>
+                </div>
+            </div>
+            <div class="section2 sections">
+                <div class="under-section1">
+                    <img src="images/x2.png" class="cart-image cart-image2" alt="">
+                </div>
+                <div class="under-section2">
+                    <h3 class="productname">Xiaomi poco x2</h3>
+                </div>
+                <div class="under-section4">
+                    <button id="x2-minus">-</button>
+                    <input id="x2-count" type="number" name="" id="" value="1">
+                    <button id="x2-plus">+</button>
+                </div>
+                <div class="under-section3">
+                    <h2 class="price">$
+                        <spam id="x2-price">219</spam>
+                    </h2>
+                </div>
+            </div>
+            <div class="section3 sections">
+                <div class="section-inner">
+                    <h3>Price <span id="total-price">$ 1418</span></h3>
+                    <h3>Tax <span id="tax-amount">$ 142</span></h3>
+                    <h3>Total <span id="grand-total">$ 1550</span></h3>
+                    <a href="http://192.168.0.1/">
+                        <button class="proceed-btn">checkout</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.getElementById('x2-plus').addEventListener('click', function (){
+            handleProductCount('x2', true);
+        });
+        document.getElementById('x2-minus').addEventListener('click', function (){
+            handleProductCount('x2', false);
+        });
+        document.getElementById('phone-plus').addEventListener('click', function(){
+            handleProductCount('phone', true);
+        });
+        document.getElementById('phone-minus').addEventListener('click', function (){
+            handleProductCount('phone', false);
+        });
+
+
+        function handleProductCount (product, isIncrease){
+            const productNumber = document.getElementById(product + '-count');
+            const productCount = parseInt(productNumber.value);
+            let unitPrice = 0;
+            let productPrice = document.getElementById(product + '-price');
+            let newProductPrice = parseInt(productPrice.innerHTML);
+            
+            if(product == 'x2'){
+                unitPrice = 210;
+            }
+            else if (product == 'phone'){
+                unitPrice = 1199;
+            }
+            if(isIncrease == true){
+                productNumber.value = productCount + 1;
+                productPrice.innerHTML = (productCount + 1) * unitPrice;
+            }
+            else if (isIncrease == false && productCount > 1){
+                productNumber.value = productCount - 1;
+                productPrice.innerHTML = (productCount - 1) * unitPrice;
+            }
+            priceCalculation();
+        }
+
+        function priceCalculation (){
+            const phonePrice = document.getElementById('phone-price');
+            const phoneNewPrice = parseInt(phonePrice.innerHTML);
+
+            const pocoPrice = document.getElementById('x2-price');
+            const pocoNewPrice = parseInt(pocoPrice.innerHTML);
+
+            const result = phoneNewPrice + pocoNewPrice;
+            const totalPrice = document.getElementById('total-price');
+            totalPrice.innerHTML = '$' + ' ' + result;
+
+            const tax = document.getElementById('tax-amount');
+            let result2 = Math.round(result * 0.1);
+            tax.innerHTML = '$' + ' ' + result2;
+
+            const grandTotal = result2 + result;
+            document.getElementById('grand-total').innerHTML = '$' + ' ' + grandTotal;
+
+
+        }
+        // document.getElementById('phone-plus').addEventListener('click', function(){
+        //     handleProductCountphone('phone', true);
+        // });
+        // document.getElementById('phone-minus').addEventListener('click', function (){
+        //     handleProductCountphone('phone', false);
+        // });
+        // document.getElementById('x2-plus').addEventListener('click', function(){
+        //     handleProductCountphone('x2', true);
+        // });
+        // document.getElementById('x2-minus').addEventListener('click', function (){
+        //     handleProductCountphone('x2', false);
+        // });
+
+        // function handleProductCountphone (product, isIncrease){
+        //     const inputNumber = document.getElementById(product + '-count');
+        //     const inputCount = parseInt(inputNumber.value);
+            
+        //     const productPrice = document.getElementById(product + '-price');
+        //     var unitPrice = 0;
+        //     if(product == 'phone'){
+        //         unitPrice = 1100;
+        //     }
+        //     else if (product == 'x2'){
+        //         unitPrice = 219;
+        //     }
+            
+        //     if (isIncrease == true){
+        //         inputNumber.value = inputCount + 1;
+        //         productPrice.innerHTML = (inputCount + 1) * unitPrice;
+        //     }
+        //     else if ( isIncrease == false && inputCount > 1){
+        //         inputNumber.value = inputCount - 1;
+        //         productPrice.innerHTML = (inputCount - 1) * unitPrice;
+        //     }
+        // }
+
+
+
+        // document.getElementById('x2-plus').addEventListener('click', function(){
+        //     handleProductCount(true);
+        // });
+        // document.getElementById('x2-minus').addEventListener('click', function (){
+        //     handleProductCount(false);
+        // });
+
+        // function handleProductCount (isIncrease){
+        //     const inputNumber = document.getElementById('x2-count');
+        //     const inputCount = parseInt(inputNumber.value);
+            
+        //     const productPrice = document.getElementById('x2-price');
+            
+        //     if (isIncrease == true){
+        //         inputNumber.value = inputCount + 1;
+        //         productPrice.innerHTML = (inputCount + 1) * 219;
+        //     }
+        //     else if ( isIncrease == false && inputCount > 1){
+        //         inputNumber.value = inputCount - 1;
+        //         productPrice.innerHTML = (inputCount - 1) * 219;
+        //     }
+        // }
+        // document.getElementById('phone-plus').addEventListener('click', function (){
+        //     productCountip(true);
+        // });
+
+        // document.getElementById('phone-minus').addEventListener('click', function (){
+        //     productCountip(false);
+        // });
+        // function productCountip (isIncrease) {
+        //    const productNumber = document.getElementById('phone-count');
+        //    const productCount = parseInt(productNumber.value);
+        //    const productPrice = document.getElementById('phone-price');
+        //    if(isIncrease == true){
+        //         productPrice.innerHTML = (productCount + 1) * 1199;
+        //         productNumber.value = (productCount) + 1 ;
+        //    }
+        //    else if (isIncrease == false && productCount > 1){
+        //         productPrice.innerHTML = (productCount - 1) * 1199;
+        //         productNumber.value = productCount - 1 ;
+        //    }
+        // }
+        // // phone section start
+
+
+        // document.getElementById('x2-plus').addEventListener('click', function (){
+        //     productCount(true);
+        // });
+
+        // document.getElementById('x2-minus').addEventListener('click', function (){
+        //     productCount(false);
+        // });
+        // function productCount (isIncrease) {
+        //    const productNumber = document.getElementById('x2-count');
+        //    const productCount = parseInt(productNumber.value);
+        //    const productPrice = document.getElementById('x2-price');
+        //    if(isIncrease == true){
+        //         productPrice.innerHTML = (productCount + 1) * 219;
+        //         productNumber.value = (productCount) + 1 ;
+        //    }
+        //    else if (isIncrease == false && productCount > 1){
+        //         productPrice.innerHTML = (productCount - 1) * 219;
+        //         productNumber.value = productCount - 1 ;
+        //    }
+        // }
+
+
+
+
+
+
+        // document.getElementById('x2-plus').addEventListener('click', function (){
+        //     handleProductCount(true);
+        // });
+        // document.getElementById('x2-minus').addEventListener('click', function(){
+        //     handleProductCount(false);
+        // });
+        // function handleProductCount (inIncrease){
+        //     var pocoNumber = document.getElementById('x2-count');
+        //     var pocoCount = parseInt(pocoNumber.value);
+        //     // pocoNumber.value = pocoCount + 1 ;
+        //     var pocoPrice = document.getElementById('x2-price');
+        //     // pocoPrice.innerHTML = (pocoCount + 1) * 219;
+        //     if (inIncrease == true) {
+        //         pocoPrice.innerHTML = (pocoCount + 1) * 219;
+        //         pocoNumber.value = pocoCount + 1 ;
+        //     }
+        //     if (inIncrease == false && pocoCount > 0){
+        //         pocoPrice.innerHTML = (pocoCount - 1) * 219;
+        //         pocoNumber.value = pocoCount - 1 ;
+        //     }
+        // }
+
+        // document.getElementById('x2-plus').addEventListener('click', function (){
+        //     handleProductCount(true);
+        // });
+        // document.getElementById('x2-minus').addEventListener('click', function (){
+        //     handleProductCount(false);
+        // })
+        // function handleProductCount (isIncrease) {
+        //     const pocoNumber = document.getElementById('x2-count');
+        //     const pocoCount = parseInt(pocoNumber.value);
+        //     const pocoPrice = document.getElementById('x2-price');
+        //     if (isIncrease == true){
+        //         pocoNumber.value = pocoCount + 1;
+        //         pocoPrice.innerHTML = (pocoCount + 1) * 219 ;
+        //     }
+        //     if (isIncrease == false && pocoCount > 0){
+        //         pocoNumber.value = pocoCount - 1;
+        //         pocoPrice.innerHTML = (pocoCount - 1) * 219 ;
+        //     }
+        // }
+        
+
+        // function handleProductCount (isIncrease){
+        //     const pocoNumber = document.getElementById('x2-count');
+        //     const pocoCount = parseInt(pocoNumber.value);
+        //     // pocoNumber.value = pocoCount + 1;
+        //     const pocoPrice = document.getElementById('x2-price');
+        //     const pocoValue = parseInt(pocoPrice.innerHTML);
+        //     if (isIncrease == true){
+        //         pocoNumber.value = pocoCount + 1;
+        //         pocoPrice.innerHTML = (pocoCount + 1) * 219 ;
+        //     }
+        //     if (isIncrease == false && pocoCount > 1) {
+        //         pocoNumber.value = pocoCount - 1;
+        //         pocoPrice.innerHTML = (pocoCount - 1) * 219 ;
+        //     }  
+        // }
+
+    
+    </script>
+</body>
+</html>
